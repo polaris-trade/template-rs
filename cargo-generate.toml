@@ -1,0 +1,27 @@
+[template]
+cargo_generate_version = ">=0.22.0"
+ignore = [
+  # example content that must not leak into new modules
+  "specs/**",
+  "docs/*.pdf",
+  "docs/*.md",
+  # meta
+  "cargo-generate.toml",
+  "README.md",
+  "CHANGELOG.md",
+  ".vscode/settings.json",
+]
+
+[placeholders]
+project-name = { type = "string", prompt = "Module / repo name (kebab-case, e.g. my-module)", regex = "^[a-z][a-z0-9-]+$" }
+crate_name = { type = "string", prompt = "Root crate name (snake_case)", default = "{{ project-name | snake_case }}", regex = "^[a-z][a-z0-9_]+$" }
+description = { type = "string", prompt = "One-line description", default = "A Rust module" }
+absolute_path = { type = "string", prompt = "Absolute path where this module will live (used to pin MCP server args)" }
+author_name = { type = "string", prompt = "Author name" }
+author_email = { type = "string", prompt = "Author email" }
+homepage = { type = "string", prompt = "Homepage URL", default = "https://github.com/{{ci_owner}}" }
+repository = { type = "string", prompt = "Repository URL", default = "https://github.com/{{ci_owner}}/{{project-name}}" }
+msrv = { type = "string", prompt = "MSRV pin (also written to rust-toolchain.toml)", default = "1.96.0", regex = "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$" }
+ci_owner = { type = "string", prompt = "GitHub owner (user or org) hosting the shared `ci` repo" }
+ci_ref = { type = "string", prompt = "Git ref of the shared `ci` repo to pin against (branch, tag, or SHA)", default = "main" }
+publish_to_crates_io = { type = "bool", prompt = "Publish releases to crates.io on release-plz merge?", default = false }

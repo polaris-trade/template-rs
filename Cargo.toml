@@ -1,0 +1,25 @@
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[workspace.package]
+edition = "2024"
+rust-version = "{{msrv}}"
+authors = ["{{author_name}} <{{author_email}}>"]
+repository = "{{repository}}"
+homepage = "{{homepage}}"
+license = "MIT"
+
+[workspace.dependencies]
+# Internal deps — add path-based entries as new members land under crates/*:
+# my-crate = { path = "crates/my-crate" }
+
+# External deps — minimal, opinionated defaults. Add or remove freely.
+anyhow = "1.0.103"
+thiserror = "2.0.18"
+mockall = "0.15"
+rstest = "0.26.1"
+tokio = { version = "1.52.3", features = ["macros", "rt-multi-thread"] }
+tracing = "0.1.44"
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0.150"
