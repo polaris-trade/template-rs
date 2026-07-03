@@ -13,8 +13,6 @@ ignore = [
 ]
 
 [placeholders]
-project-name = { type = "string", prompt = "Module / repo name (kebab-case, e.g. my-module)", regex = "^[a-z][a-z0-9-]+$" }
-crate_name = { type = "string", prompt = "Root crate name (snake_case)", default = "{{ project-name | snake_case }}", regex = "^[a-z][a-z0-9_]+$" }
 description = { type = "string", prompt = "One-line description", default = "A Rust module" }
 absolute_path = { type = "string", prompt = "Absolute path where this module will live (used to pin MCP server args)" }
 author_name = { type = "string", prompt = "Author name" }
