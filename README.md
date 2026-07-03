@@ -54,16 +54,25 @@ cargo generate --git https://github.com/<owner>/rust-boilerplate --name my-modul
 4. Set required secrets in the new repo: `RELEASE_PLZ_TOKEN` (PAT with `contents: write` + `pull-requests: write`) and, if publishing, `CARGO_REGISTRY_TOKEN`.
 5. Push. First push triggers CI matrix.
 
-### Not using MIT?
+## License
 
-Template defaults to MIT everywhere. If the new project uses a different license, update all four places consistently — none of them are auto-derived:
+Dual-licensed **`MIT OR Apache-2.0`** (Rust ecosystem convention — matches `serde`, `tokio`, `hyper`). Ships:
 
-1. Replace `LICENSE` with the correct license text.
-2. `Cargo.toml` → `[workspace.package] license = "MIT"` → your SPDX identifier (e.g. `Apache-2.0`, `MIT OR Apache-2.0`, `GPL-3.0-or-later`, `MPL-2.0`).
-3. Every `crates/*/Cargo.toml` → `license = "MIT"` (workspace inheritance is opt-in per field; the generated crate `Cargo.toml` sets it explicitly).
-4. This `README.md` and each crate `README.md` — swap the "MIT" mention at the bottom.
+- `LICENSE-MIT` — MIT license text with your copyright holder.
+- `LICENSE-APACHE` — verbatim Apache 2.0.
+- `NOTICE` — Apache 2.0 attribution notice.
 
-If dual-licensing (`MIT OR Apache-2.0` — Rust ecosystem convention), add `LICENSE-MIT` and `LICENSE-APACHE` alongside; drop the single `LICENSE`.
+Both licenses grant permission; downstream picks either.
+
+### Switching to a different license
+
+If a specific module needs a different license (e.g. proprietary, AGPL, single-MIT), update these places consistently — none are auto-derived:
+
+1. Replace or delete `LICENSE-MIT` / `LICENSE-APACHE` / `NOTICE`. For a single license, drop the extras and add a single `LICENSE`.
+2. `Cargo.toml` → `[workspace.package] license = "MIT OR Apache-2.0"` → your SPDX identifier (`Apache-2.0`, `MIT`, `AGPL-3.0-only`, `GPL-3.0-or-later`, `MPL-2.0`, `LicenseRef-Proprietary` for closed-source, …).
+3. Every `crates/*/Cargo.toml` — same field. Workspace inheritance is opt-in per field; generated crate `Cargo.toml` sets `license` explicitly so no silent divergence.
+4. This `README.md` and each crate `README.md` — swap the "License" section.
+5. For proprietary crates also set `publish = false` in the crate `Cargo.toml` to guarantee they never go to crates.io by accident.
 
 ## Layout
 

@@ -8,7 +8,7 @@ rust-version = "{{msrv}}"
 authors = ["{{author_name}} <{{author_email}}>"]
 repository = "{{repository}}"
 homepage = "{{homepage}}"
-license = "MIT"
+license = "MIT OR Apache-2.0"
 
 [workspace.dependencies]
 # Internal deps — add path-based entries as new members land under crates/*:

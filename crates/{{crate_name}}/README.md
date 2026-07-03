@@ -14,4 +14,4 @@ assert_eq!(msg, "hello, world");
 
 ## License
 
-MIT — see the workspace-root `LICENSE`.
+Dual-licensed under either [MIT](../../LICENSE-MIT) or [Apache 2.0](../../LICENSE-APACHE), at your option.
