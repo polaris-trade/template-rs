@@ -1,5 +1,7 @@
 # Before starting work
 
+Visibility: `{{visibility}}` (PUBLIC or PRIVATE). Replace at generation time. If PUBLIC, this module may not depend on, dev-dep on, or mention the name of any PRIVATE crate. See root `AGENTS.md#OSS/Private module discipline`.
+
 - Run `lat search` to find sections relevant to your task. Read them to understand the design intent before writing code.
 - Run `lat expand` on user prompts to expand any `[[refs]]` — this resolves section names to file locations and provides context.
 
@@ -192,7 +194,12 @@ Use Conventional Commits: `type(scope): subject`.
 - Use lowercase subject style, not start-case, PascalCase, or upper-case.
 - Do not suggest merge commits.
 
-The `pr-title` workflow enforces this via `amannn/action-semantic-pull-request` — commits themselves are advisory unless you also install a local `commitlint` hook.
+Two enforcement layers:
+
+- **Local**: `lefthook.yml` runs `convco check` on `commit-msg` and enforces `<type>/<slug>` branch names on `pre-commit`. Install once per clone via `just hooks` (needs `lefthook` + `convco` on PATH).
+- **CI**: `pr-title` workflow (`amannn/action-semantic-pull-request`) blocks non-conforming PR titles at merge time.
+
+Local hooks are the fast feedback loop; CI is the backstop for anyone who bypassed them.
 
 # Unit Test Rules
 

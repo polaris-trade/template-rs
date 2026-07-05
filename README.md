@@ -50,9 +50,24 @@ cargo generate --git https://github.com/<owner>/rust-boilerplate --name my-modul
 
 1. `cd <new-module>`.
 2. `git init && git add -A && git commit -m "chore: initial commit"`.
-3. Set `absolute_path` correctly in `.mcp.json` and `.vscode/mcp.json` if you moved the folder.
-4. Set required secrets in the new repo: `RELEASE_PLZ_TOKEN` (PAT with `contents: write` + `pull-requests: write`) and, if publishing, `CARGO_REGISTRY_TOKEN`.
-5. Push. First push triggers CI matrix.
+3. Install local git hooks: `just hooks` (runs `lefthook install`). Requires `lefthook` + `convco` on PATH (`cargo install lefthook convco` or `brew install lefthook convco`).
+4. Set `absolute_path` correctly in `.mcp.json` and `.vscode/mcp.json` if you moved the folder.
+5. Set required secrets in the new repo: `RELEASE_PLZ_TOKEN` (PAT with `contents: write` + `pull-requests: write`) and, if publishing, `CARGO_REGISTRY_TOKEN`.
+6. Push. First push triggers CI matrix.
+
+## Local git hooks (lefthook)
+
+`lefthook.yml` at the repo root defines three hook stages:
+
+| Stage        | Runs                                                                        |
+| ------------ | --------------------------------------------------------------------------- |
+| `pre-commit` | branch-name check, `cargo fmt --check`, `cargo clippy -D warnings`, `lat check` (parallel). |
+| `commit-msg` | `convco check` — Conventional Commits gate.                                 |
+| `pre-push`   | block direct push to `main`/`master`, then `cargo nextest run --workspace`. |
+
+Bypass a single hook with `LEFTHOOK=0 git commit …`. Never bypass in shared work — CI enforces the same gates and will re-fail. To skip only one specific command, use `LEFTHOOK_EXCLUDE=clippy git commit …`.
+
+To disable a check in a specific repo without editing the committed config, copy the block into an untracked `lefthook-local.yml` (already gitignored) and set `skip: true`.
 
 ## License
 
