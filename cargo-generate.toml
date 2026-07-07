@@ -7,7 +7,7 @@ ignore = [
   "docs/*.md",
   # meta
   "cargo-generate.toml",
-  "README.md",
+  "TEMPLATE.md",
   "CHANGELOG.md",
   ".vscode/settings.json",
 ]
