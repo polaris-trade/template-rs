@@ -142,12 +142,7 @@ split-debuginfo = "packed"
 [net]
 git-fetch-with-cli = true
 
-# Kellnr alt-registries. Consumers of a standalone module clone need these
-# entries (or copies in their own ~/.cargo/config.toml) to resolve
-# `{ version = "…", registry = "polaris" }` or `polaris-internal` deps at
-# build time.
-[registries.polaris]
-index = "sparse+https://registry-oss-rs.fly.dev/api/v1/crates/"
-
-[registries.polaris-internal]
-index = "sparse+https://registry-internal-rs.fly.dev/api/v1/crates/"
+# Cross-repo deps resolve from git tags pinned in each module's Cargo.toml, e.g.
+# transport_core = { git = "https://github.com/polaris-trade/transport-core", tag = "transport_core-v0.2.1" }
+# No alt-registry. Private crates fetch over SSH; [net] git-fetch-with-cli above
+# lets cargo reuse the system git credentials for those private repos.

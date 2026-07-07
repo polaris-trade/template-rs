@@ -44,7 +44,6 @@ cargo generate --git https://github.com/<owner>/rust-boilerplate --name my-modul
 | `msrv`                  | MSRV pin. Written to `rust-toolchain.toml` + `[package]`.                   |
 | `ci_owner`              | GitHub owner (user or org) hosting the shared `ci` repo.                    |
 | `ci_ref`                | Git ref of the shared `ci` repo to pin against (branch, tag, or SHA).       |
-| `publish_to_crates_io`  | Whether `release-plz` publishes to crates.io on release-PR merge.           |
 
 ## Example crate
 
@@ -66,7 +65,7 @@ Replace it with the module's real API.
 2. `git init && git add -A && git commit -m "chore: initial commit"`.
 3. Install local git hooks: `just hooks` (runs `lefthook install`). Requires `lefthook` + `convco` on PATH (`cargo install lefthook convco` or `brew install lefthook convco`).
 4. Set `absolute_path` correctly in `.mcp.json` and `.vscode/mcp.json` if you moved the folder.
-5. Set required secrets in the new repo: `RELEASE_PLZ_TOKEN` (PAT with `contents: write` + `pull-requests: write`) and, if publishing, `CARGO_REGISTRY_TOKEN`.
+5. Set the required secret in the new repo: `RELEASE_PLZ_TOKEN` (PAT with `contents: write` + `pull-requests: write`). No `CARGO_REGISTRY_TOKEN` — crates set `publish = false` (git-tag distribution).
 6. Push. First push triggers CI matrix.
 
 ## Local git hooks (lefthook)

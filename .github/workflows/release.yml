@@ -7,9 +7,5 @@ on:
 jobs:
   release:
     uses: {{ci_owner}}/ci/.github/workflows/release.yml@{{ci_ref}}
-    with:
-      publish: {{publish_to_registry}}
     secrets:
       release-plz-token:                       {% raw %}${{ secrets.RELEASE_PLZ_TOKEN }}{% endraw %}
-      cargo-registries-polaris-token:          {% raw %}${{ secrets.CARGO_REGISTRIES_POLARIS_TOKEN }}{% endraw %}
-      cargo-registries-polaris-internal-token: {% raw %}${{ secrets.CARGO_REGISTRIES_POLARIS_INTERNAL_TOKEN }}{% endraw %}
