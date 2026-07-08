@@ -8,8 +8,8 @@ Opinionated cargo-generate template for a new single-crate Rust library. Bootstr
 - `lat.md/` knowledge-graph scaffolding.
 - Agent config for Claude Code, Copilot, and generic Codex agents (`AGENTS.md`, `CLAUDE.md`, `.claude/`, `.agents/`, `.github/copilot-instructions.md`).
 - MCP servers wired for `lat`, `fff-mcp`, `rust-analyzer-mcp` (VS Code + Claude Code).
-- Shared reusable GitHub Actions workflows: `ci`, `pr-title` lint, `release` (`release-plz`).
-- `release-plz.toml` conventional-commits changelog config.
+- Shared reusable GitHub Actions workflows: `ci`, `pr-title` lint, `release` (`release-please`).
+- `release-please-config.json` + `.release-please-manifest.json` conventional-commits changelog config.
 - `specs/` layout for the spec-driven workflow (requirements → design → tasks → validation).
 - MIT license + CHANGELOG stub.
 
@@ -120,11 +120,12 @@ If a specific module needs a different license (e.g. proprietary, AGPL, single-M
   specs/                    spec-driven workflow artifacts
   AGENTS.md                 agent-facing project rules (memory, search, code comments…)
   CLAUDE.md                 one-line `@AGENTS.md` import
-  CHANGELOG.md              maintained by release-plz
+  CHANGELOG.md              maintained by release-please
   Cargo.toml                single-crate manifest (package + profiles)
   LICENSE-MIT / LICENSE-APACHE / NOTICE
   README.md                 module readme (templated with the module name)
-  release-plz.toml          conventional-commits changelog config
+  release-please-config.json     release-please config (component, changelog sections)
+  .release-please-manifest.json  current version tracked by release-please
   rust-toolchain.toml       MSRV pin (SOT for CI too)
 ```
 

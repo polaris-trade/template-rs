@@ -6,6 +6,6 @@ on:
 
 jobs:
   release:
-    uses: {{ci_owner}}/ci/.github/workflows/release.yml@{{ci_ref}}
+    uses: {{ci_owner}}/ci/.github/workflows/release-please.yml@{{ci_ref}}
     secrets:
-      release-plz-token:                       {% raw %}${{ secrets.RELEASE_PLZ_TOKEN }}{% endraw %}
+      release-token:                           {% raw %}${{ secrets.RELEASE_PLZ_TOKEN }}{% endraw %}
