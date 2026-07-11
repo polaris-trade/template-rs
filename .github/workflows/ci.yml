@@ -8,3 +8,15 @@ on:
 jobs:
   rust:
     uses: {{ci_owner}}/ci/.github/workflows/rust-ci.yml@{{ci_ref}}
+    # Toolchain matrix is handled centrally in `ci`: pull_request runs
+    # stable + nightly only (fast feedback); push to main runs the full
+    # rolling MSRV window. No caller input needed. Override per repo only
+    # if required, e.g. `pr-msrv-window: 3` to widen PR coverage.
+    #
+    # Private modules: uncomment `with:` to restrict the OS matrix to Linux.
+    # macOS included minutes debit at 10x, Windows at 2x, so the default
+    # 3-OS matrix drains the org's private-repo pool fast. Public modules
+    # (free unlimited) should leave the default matrix in place.
+    #
+    # with:
+    #   os-matrix: '["ubuntu-latest"]'
